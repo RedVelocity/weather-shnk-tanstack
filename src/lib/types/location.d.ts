@@ -1,31 +1,14 @@
 type FeatureLocation = {
   type: 'FeatureCollection';
-  query: string[];
   features: Feature[];
   attribution: string;
 };
 
 type Feature = {
-  id: string;
   type: 'Feature';
-  place_type: string[];
-  relevance: number;
-  properties: Properties;
-  text_en: string;
-  language_en: string;
-  place_name_en: string;
-  text: string;
-  language: string;
-  place_name: string;
-  bbox: number[];
-  center: number[];
+  id: string;
   geometry: Geometry;
-  context: Context[];
-};
-
-type Properties = {
-  mapbox_id: string;
-  wikidata: string;
+  properties: Properties;
 };
 
 type Geometry = {
@@ -33,15 +16,57 @@ type Geometry = {
   coordinates: number[];
 };
 
-type Context = {
-  id: string;
+type Properties = {
   mapbox_id: string;
-  wikidata: string;
-  text_en: string;
-  language_en: string;
-  text: string;
-  language: string;
-  short_code?: string;
+  feature_type: string;
+  full_address: string;
+  name: string;
+  name_preferred: string;
+  coordinates: {
+    longitude: number;
+    latitude: number;
+  };
+  place_formatted?: string;
+  bbox: number[];
+  context: Context;
+};
+
+type Context = {
+  region?: Region;
+  country?: Country;
+  place?: Place;
+};
+
+type Region = {
+  mapbox_id: string;
+  name: string;
+  wikidata_id?: string;
+  region_code: string;
+  region_code_full: string;
+  translations?: Translations;
+};
+
+type Country = {
+  mapbox_id: string;
+  name: string;
+  wikidata_id?: string;
+  country_code: string;
+  country_code_alpha_3: string;
+  translations?: Translations;
+};
+
+type Place = {
+  mapbox_id: string;
+  name: string;
+  wikidata_id?: string;
+  translations?: Translations;
+};
+
+type Translations = {
+  [language: string]: {
+    language: string;
+    name: string;
+  };
 };
 
 type FormattedLocation = {
@@ -51,6 +76,7 @@ type FormattedLocation = {
   district?: string;
   address: string;
   country: string;
+  countryCode: string;
   region?: string;
 };
 
