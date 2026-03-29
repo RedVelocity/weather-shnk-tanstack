@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "weather-shnk-tanstack",
+  "compatibility_date": "2025-09-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  // Development environment (default)
+  "kv_namespaces": [
+    { "binding": "KV", "id": "eae45a2beba0478a9827113406c77180" },
+  ],
+  // "ai": { "binding": "AI" },
+  "env": {
+    "preview": {
+      "kv_namespaces": [
+        { "binding": "KV", "id": "eae45a2beba0478a9827113406c77180" },
+      ],
+      // "ai": { "binding": "AI" }
+    },
+    "production": {
+      "kv_namespaces": [
+        { "binding": "KV", "id": "ebf1288512c94b39b2fe0df7d7cbb516" },
+      ],
+    },
+  },
+}

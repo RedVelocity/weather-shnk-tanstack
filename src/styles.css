@@ -1,0 +1,201 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-*: initial;
+  --color-cool: #86e7f1;
+  --color-mild: #fac5ec;
+  --color-milder: #f5958a;
+  --color-hot: #ffdd28;
+  --color-focus: #60a5fa;
+  --color-danger: #e74343;
+  --color-danger-l2: #c11a1a;
+  --color-warning: #ffab00;
+  --color-success: #01c9a1;
+  --color-info: #2a7ab0;
+
+  --color-base: #e3e7e9;
+  --color-base-dark: #0d1b2a;
+
+  --color-wrapper: #f1f3f5;
+  --color-wrapper-dark: #1b263b;
+
+  --color-surface: #fdfdfe;
+  --color-surface-dark: #202e4a;
+
+  --color-gray: #94a3b8;
+  --color-white: white;
+  --color-black: black;
+  --color-current: currentColor;
+  --color-inherit: inherit;
+  --color-transparent: transparent;
+
+  --text-color-*: initial;
+  --text-color-primary: #1e293b;
+  --text-color-primary-dark: #e2e8f0;
+
+  --text-color-secondary: #475569;
+  --text-color-secondary-dark: #afacbf;
+
+  --text-color-muted: #2e3a4e;
+  --text-color-current: currentColor;
+  --text-color-inherit: inherit;
+  --text-color-transparent: transparent;
+
+  --breakpoint-*: initial;
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility bg-gradient-hot {
+  @apply bg-linear-to-br from-milder to-hot;
+}
+
+@utility bg-gradient-cool {
+  @apply bg-linear-to-br from-cool to-[#D8B4FE];
+}
+
+@utility bg-gradient-mild {
+  @apply bg-linear-to-br from-mild to-milder;
+}
+
+@utility secondary {
+  @apply text-secondary dark:text-secondary-dark;
+}
+/* Components */
+@utility card {
+  @apply rounded-l rounded-br shadow-sm rounded-tr-xl;
+}
+@utility card-border {
+  @apply rounded-l rounded-br rounded-tr-xl;
+}
+@utility loader {
+  @apply w-16 h-16 border-8 border-t-8 rounded-full md:h-20 md:w-20 border-base-dark border-t-focus;
+  animation: spin 2s linear infinite;
+}
+@utility pill {
+  @apply px-2 py-1 rounded-full;
+}
+@utility wrapper {
+  @apply p-4 tracking-wide card bg-wrapper/90 dark:bg-wrapper-dark/90 backdrop-blur-sm;
+}
+@utility surface {
+  @apply bg-surface dark:bg-surface-dark;
+}
+@utility surface-light {
+  @apply bg-surface/25;
+}
+@utility hot {
+  @apply bg-hot;
+}
+@utility cool {
+  @apply bg-cool;
+}
+@utility mild {
+  @apply bg-mild;
+}
+
+@layer base {
+  /* Root Styles */
+  html {
+    @apply text-[14px] lg:text-[12px] relative;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Outfit', sans-serif;
+  }
+  body {
+    @apply flex flex-col min-h-dvh text-primary bg-base scroll-smooth dark:bg-base-dark dark:text-primary-dark;
+  }
+  h1 {
+    @apply text-4xl font-semibold tracking-wide lg:text-5xl;
+  }
+  h2 {
+    @apply text-2xl font-semibold tracking-wide lg:text-3xl;
+  }
+  h3 {
+    @apply text-xl font-semibold tracking-wide;
+  }
+  h4 {
+    @apply text-lg font-semibold tracking-wide;
+  }
+  h5 {
+    @apply font-semibold tracking-wide;
+  }
+  p {
+    @apply tracking-wide;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+}
+@layer utilities {
+  *:focus {
+    @apply outline-hidden ring-3 ring-focus;
+  }
+}
+
+/* Leaflet Styles */
+.leaflet-container {
+  @apply h-full;
+}
+.leaflet-control-zoom > a {
+  @apply surface hover:bg-surface/80 dark:hover:bg-surface-dark/80 secondary;
+}
+.leaflet-container .leaflet-control-attribution {
+  @apply surface secondary;
+}
+.leaflet-popup .leaflet-popup-content-wrapper {
+  @apply surface secondary;
+}
+.leaflet-popup-tip {
+  @apply surface secondary;
+}
+
+/* Swiper Styles */
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-sides-offset: -35px;
+  @media (min-width: 1024px) {
+    --swiper-navigation-sides-offset: -30px;
+  }
+  background-image: url('/assets/icons/next.png') !important;
+  @apply w-16! h-16! bg-center bg-no-repeat bg-contain z-100 invert-75 dark:invert-0;
+}
+.swiper-button-prev {
+  @apply rotate-180;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: '' !important;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
