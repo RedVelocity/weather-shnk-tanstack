@@ -13,6 +13,7 @@ import HourlyWeather from '@/components/weather/HourlyWeather';
 import WeatherBanner from '@/components/weather/WeatherBanner';
 import Favorites from '@/components/Favorites';
 import LeafletMap from '@/components/map/LeafletMap';
+import SearchCard from '@/components/SearchCard';
 
 export const Route = createFileRoute('/$place')({
   loader: async ({ params }) => {
@@ -64,6 +65,7 @@ const getRouteData = createServerFn({ method: 'GET' })
   .handler(async (place) => {
     // Destructure data from context
     const location = await getLocation(place.data);
+    if (location instanceof Response) throw new Error('Location not found');
 
     const bannerImagePromise = getPhoto(location);
     const weatherPromise = getWeather(
@@ -95,7 +97,11 @@ function Place() {
     <div className="grid gap-4 m-4 lg:gap-6 lg:grid-cols-3">
       {/* PC Row 1 */}
       <section className="flex flex-col space-y-3">
-        {/* <SearchCard /> */}
+        <ClientOnly
+          fallback={<div className="h-20 lg:h-1/4 wrapper animate-pulse" />}
+        >
+          <SearchCard />
+        </ClientOnly>
         <WeatherCard weather={weather} location={location} />
       </section>
       <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">

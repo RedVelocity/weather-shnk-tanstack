@@ -32,7 +32,7 @@ const getUVIInfo = (uvi: number): [string, string] => {
   return UVI[Math.min(Math.max(0, uvi), 10)];
 };
 
-const getIconCards = (weather: FormattedData): Array<IconCardProps> => {
+const getIconCards = (weather: FormattedData): IconCardProps[] => {
   return [
     {
       icon: 'sunrise',
@@ -84,7 +84,7 @@ const IconCard = ({ textLeft, textRight, icon }: IconCardProps) => {
           : 'wrapper secondary',
       )}
     >
-      <h5 className="capitalize">{textLeft}</h5>
+      <p className="heading-xs capitalize">{textLeft}</p>
       <div className="flex items-center flex-1 gap-2 p-2">
         <img
           className={clsx(
@@ -96,13 +96,14 @@ const IconCard = ({ textLeft, textRight, icon }: IconCardProps) => {
           width={32}
           alt={textLeft}
         />
-        <h2
+        <p
           className={clsx(
             icon === 'uv' && `${getUVIInfo(Number(textRight))[1]}`,
+            'heading-lg',
           )}
         >
           {icon === 'uv' ? getUVIInfo(Number(textRight))[0] : textRight}
-        </h2>
+        </p>
       </div>
     </div>
   );

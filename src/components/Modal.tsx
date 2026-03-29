@@ -41,7 +41,7 @@ const Modal = ({ heading, children, open, setOpen, layoutId }: ModalProps) => {
           }
           render={
             <motion.div
-              className="flex flex-col items-center justify-center gap-2 p-4 m-auto overflow-auto w-fit h-fit wrapper card"
+              className="flex flex-col items-center justify-center gap-2 p-4 m-auto overflow-auto w-fit h-fit wrapper card backdrop-blur"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}

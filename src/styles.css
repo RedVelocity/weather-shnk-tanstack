@@ -4,7 +4,7 @@
 
 @theme {
   --color-*: initial;
-  --color-cool: #86e7f1;
+  --color-cool: #47ceff;
   --color-mild: #fac5ec;
   --color-milder: #f5958a;
   --color-hot: #ffdd28;
@@ -66,7 +66,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-gray, currentColor);
   }
 }
 
@@ -87,10 +87,13 @@
 }
 /* Components */
 @utility card {
-  @apply rounded-l rounded-br shadow-sm rounded-tr-xl;
+  @apply shadow-sm rounded-l rounded-br rounded-tr-xl;
 }
 @utility card-border {
   @apply rounded-l rounded-br rounded-tr-xl;
+}
+@utility card-hollow {
+  @apply border-2 dark:border-surface-dark border-surface rounded-l rounded-br rounded-tr-xl;
 }
 @utility loader {
   @apply w-16 h-16 border-8 border-t-8 rounded-full md:h-20 md:w-20 border-base-dark border-t-focus;
@@ -100,7 +103,10 @@
   @apply px-2 py-1 rounded-full;
 }
 @utility wrapper {
-  @apply p-4 tracking-wide card bg-wrapper/90 dark:bg-wrapper-dark/90 backdrop-blur-sm;
+  @apply p-4 tracking-wide card bg-wrapper/90 dark:bg-wrapper-dark/90;
+}
+@utility wrapper-dark {
+  @apply p-4 tracking-wide card bg-wrapper-dark/90;
 }
 @utility surface {
   @apply bg-surface dark:bg-surface-dark;
@@ -124,23 +130,24 @@
     @apply text-[14px] lg:text-[12px] relative;
     -webkit-tap-highlight-color: transparent;
     font-family: 'Outfit', sans-serif;
+    scrollbar-gutter: stable;
   }
   body {
     @apply flex flex-col min-h-dvh text-primary bg-base scroll-smooth dark:bg-base-dark dark:text-primary-dark;
   }
-  h1 {
+  .heading-xl {
     @apply text-4xl font-semibold tracking-wide lg:text-5xl;
   }
-  h2 {
+  .heading-lg {
     @apply text-2xl font-semibold tracking-wide lg:text-3xl;
   }
-  h3 {
+  .heading-md {
     @apply text-xl font-semibold tracking-wide;
   }
-  h4 {
+  .heading-sm {
     @apply text-lg font-semibold tracking-wide;
   }
-  h5 {
+  .heading-xs {
     @apply font-semibold tracking-wide;
   }
   p {
@@ -172,9 +179,8 @@
 .leaflet-popup-tip {
   @apply surface secondary;
 }
-
 /* Swiper Styles */
-.swiper-button-next,
+/* .swiper-button-next,
 .swiper-button-prev {
   --swiper-navigation-sides-offset: -35px;
   @media (min-width: 1024px) {
@@ -189,7 +195,7 @@
 .swiper-button-next::after,
 .swiper-button-prev::after {
   content: '' !important;
-}
+} */
 
 @keyframes spin {
   0% {

@@ -5,7 +5,7 @@ const MAX_FAVORITES = 4;
 
 export const useFavorites = () => {
   const [favorites, setFavorites] = useLocalStorage<
-    Array<FormattedLocation | 'unset'>
+    (FormattedLocation | 'unset')[]
   >({
     key: 'favorites',
     defaultValue: new Array(MAX_FAVORITES).fill('unset'),

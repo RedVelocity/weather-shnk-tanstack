@@ -3,7 +3,7 @@ import type { FormattedLocation } from '@/lib/types/location';
 
 const MAX_SIZE = 8;
 const useRecentSearch = () => {
-  const [searches, setSearches] = useLocalStorage<Array<FormattedLocation>>({
+  const [searches, setSearches] = useLocalStorage<FormattedLocation[]>({
     key: 'recentSearches',
     defaultValue: [],
   });

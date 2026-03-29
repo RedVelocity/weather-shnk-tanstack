@@ -42,7 +42,7 @@ const mapHoursToPeriods = (hourly: HourlyWeather, timezone: string) => {
     );
 
     if (period) {
-      if (!(period.name in periodData)) {
+      if (!periodData[period.name]) {
         periodData[period.name] = [];
       }
       periodData[period.name].push(hour);
@@ -126,8 +126,8 @@ const DaySummary = ({
             >
               <WeatherIcon icon={period.icon} size="medium" />
               <div>
-                <h3 className="text-primary-dark/70">{period.name}</h3>
-                <h2>{Math.round(period.temp)}°C</h2>
+                <p className="heading-md text-primary-dark/70">{period.name}</p>
+                <p className="heading-lg">{Math.round(period.temp)}°C</p>
                 <span className="text-lg text-primary-dark/70">
                   {period.description}
                 </span>
